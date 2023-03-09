@@ -32,20 +32,28 @@ if($_SESSION["email"]!="admin@gmail.com"){header("location:index.php");}
           <li class="nav-item">
             <a class="nav-link" href="ajout_etudiant.php">AJOUTER UN ETUDIANT</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ajout_election.php">AJOUTER ELECTION</a>
+          </li>
           
           <li class="nav-item">
             <a class="nav-link" href="list_candi.php">LISTE DES CANDIDATS</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="crud_etudiant.php">LISTE DES ETUDIANT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="crud_election.php">LISTE DES ELECTIONS</a>
+          </li>
+          <li class="nav-item">
           <form method="get" action="">
     <input class="form-control mr-sm-2" type="search" name="mc"
-    placeholder="Search" aria-label="Search"></li>
+    placeholder="chercher" value="<?= @$mc ?>" aria-label="Search"></li>
           <li class="nav-item">
           <button type="submit" name="submit" class="btn btn-primary">
         CHERCHER</button>
   </form></li>
-<li class="nav-item"><b>
-<?php echo "ADMIN"; ?></b>
+<li class="nav-item">
 </li>
 </nav>
         </ul>

@@ -1,15 +1,13 @@
-<?php
+<?php include "Election.php";
 include "header_admin.php";
-include "Candidat.php";
-
-$e = new CrudCandidat();
+$e = new CrudElection();
 $res = $e->getAll();
 if(isset($_GET['submit'])){
     $mc = $_GET['mc'];
     $res=$e->getParmc($mc);
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,40 +18,41 @@ if(isset($_GET['submit'])){
     <title>Document</title>
 </head>
 <body>
-<P></P>
-<p><br><br></p>
 
+
+
+<p><br><br></p>
+<p><br></p>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">ID CANDIDAT</th>
-      <th scope="col">NOM</th>
-      <th scope="col">PRENOM</th>
-      <th scope="col">PHOTO</th>
-      <th scope="col">SLOGAN</th>
+      <th scope="col">ID_Election</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Date_debut</th>
+      <th scope="col">Date_fin</th>
       <th>ACTION</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach($res as $r){?>
     <tr>
-      <td><?php echo $r["ID_Candidat"] ;?></td>
+      <td><?php echo $r["ID_Election"] ;?></td>
       <td><?php echo $r["Nom"] ;?></td>
-      <td><?php echo $r["Prenom"] ;?></td>
-      <td><?php echo $r["Photo"] ;?></td>
-      <td><?php echo $r["Slogan"] ;?></td>
+      <td><?php echo $r["Date_Debut"] ;?></td>
+      <td><?php echo $r["Date_Fin"] ;?></td>
+      
       <td> 
-      <form method="get" action="delete_candidat.php">
-        <input type="hidden" name="id" value="<?php echo $r["ID_Candidat"];?>">  
+      <form method="get" action="delete_election.php">
+        <input type="hidden" name="id_election" value="<?php echo $r["ID_Election"];?>">  
       <button type="submit"  class="btn btn-danger">
         supprimer</button></form></td>
         <td>
-        <form method="POST" action="modifier_candidat.php">
-        <input type="hidden" name="id" value="<?php echo $r["ID_Candidat"];?>"> 
+        <form method="POST" action="modifier_election.php">
+        <input type="hidden" name="id_election" value="<?php echo $r["ID_Election"];?>"> 
         <input type="hidden" name="nom" value="<?php echo $r["Nom"];?>">  
-        <input type="hidden" name="prenom" value="<?php echo $r["Prenom"];?>">  
-        <input type="hidden" name="photo" value="<?php echo $r["Photo"];?>">
-        <input type="hidden" name="slogan" value="<?php echo $r["Slogan"];?>"> 
+        <input type="hidden" name="date_debut" value="<?php echo $r["Date_Debut"];?>">  
+        <input type="hidden" name="date_fin" value="<?php echo $r["Date_Fin"];?>">  
+  
      <button type="submit" name="submit" class="btn btn-primary">
         modifier</button></form>
         </td>
@@ -62,6 +61,8 @@ if(isset($_GET['submit'])){
     <?php } ?>
   </tbody>
 </table>
+
+
     
 </body>
 </html>

@@ -8,8 +8,7 @@ if(isset($_POST["submit"])){
     $photo = $_POST['photo']; 
     $slogan = $_POST['slogan'];  
 }
-?>
-<?php if(isset($_POST['update'])){
+ if(isset($_POST['update'])){
     $e = new CrudCandidat();
      $id = $_POST["id"];
       $nom = $_POST['nom']; 

@@ -18,7 +18,7 @@ if(isset($_POST["submit"])){
     if(!($e->pwdmatch())){
         header("location:signup_etudiant.php?error=PASSWORD DIDNT MATCH!!");
     }
-    else if((!$e->verifierUniques($matricule,$tel,$email))){
+    else if(($e->verifierUniques($matricule,$tel,$email))){
       header("location:signup_etudiant.php?error=ETUDIANT DEJA INSCRIT :)");
     }
     else{

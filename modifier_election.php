@@ -1,28 +1,26 @@
-<?php
-include "Candidat.php";
-include "header_admin.php";
+<?php 
+include "Election.php";
 if(isset($_POST["submit"])){
     //collection des data
-    $id = $_POST['id'];
+    $id_election= $_POST["id_election"];
     $nom = $_POST['nom']; 
-    $prenom = $_POST['prenom']; 
-    $photo = $_POST['photo']; 
-    $slogan = $_POST['slogan']; 
-   //traitement :
-    $e = new Candidat($id,$nom,$prenom,$photo,$slogan);
-
-    if(($e->verifierUniques($id))){
-      header("location:ajout_candidat.php?error=ETUDIANT DEJA INSCRIT :)");
-    }
-    else{
-    $e->setCandidat($id,$nom,$prenom,$photo,$slogan);
-    header("location:ajout_candidat.php?error=ok");
-    }}
-
-
+    $date_debut = $_POST['date_debut']; 
+    $date_fin= $_POST['date_fin']; 
+}
+ if(isset($_POST['update'])){
+    $e = new CrudElection();
+     $id_election = $_POST["id_election"];
+      $nom = $_POST['nom']; 
+      $date_debut = $_POST['date_debut']; 
+      $date_fin = $_POST['date_fin'];  
+      if($e->updateInfo($id_election,$nom,$date_debut,$date_fin)==1){
+        header("location:crud_election.php");
+      }
+} ?>
 
 
-?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,10 +28,11 @@ if(isset($_POST["submit"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
-    <title>Ajout_Candidat</title>
+    <title>MODIFIER_ELECTION</title>
 </head>
 <body>
-<P><br></P>
+
+
 <section class="vh-100" style="background-color: #eee;">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -43,7 +42,7 @@ if(isset($_POST["submit"])){
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-            <form class="mx-1 mx-md-4" method="post" action="">
+            <form class="mx-1 mx-md-4" method="POST" action="">
 
             <?php if(isset($_GET['error'])){$error = $_GET['error'] ;?>
               <?php if($error == "ok"){?>
@@ -59,19 +58,13 @@ if(isset($_POST["submit"])){
             </div>
 
 
-                <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input required type="text" id="form3Example1c" name="id" 
-                      minlength="4" maxlength="6" class="form-control" />
-                      <label class="form-label" for="form3Example1c">ID_CANDIDAT</label>
-                    </div>
-                  </div>
+
+           
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input required type="text" id="form3Example1c" name="nom" class="form-control" />
+                      <input required type="text" value="<?= $nom;?>" id="form3Example1c" name="nom" class="form-control" />
                       <label class="form-label" for="form3Example1c">NOM</label>
                     </div>
                   </div>
@@ -79,32 +72,26 @@ if(isset($_POST["submit"])){
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input required type="text" id="form3Example1c" name="prenom" class="form-control" />
-                      <label class="form-label" for="form3Example1c">PRENOM</label>
+                      <input required type="date" value="<?= $date_debut;?>" id="form3Example1c" name="date_debut"
+                       class="form-control" />
+                      <label class="form-label" for="form3Example1c">DATE_DEBUT</label>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input required type="file" id="form3Example3c" name="photo" class="form-control" />
-                      <label class="form-label" for="form3Example3c">AJOUTER PHOTO</label>
-                    </div>
-                  </div>
-
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input required type="text" id="form3Example1c" minlength="15"
-                       maxlength="50" name="slogan" class="form-control" />
-                      <label class="form-label" for="form3Example1c">SLOGAN</label>
+                      <input required type="date" id="form3Example3c" 
+                      value="<?= $date_fin;?>" name="date_fin" class="form-control" />
+                      <label class="form-label" for="form3Example3c">DATE_FIN</label>
                     </div>
                   </div>
 
                
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" name="submit" class="btn btn-primary btn-lg">AJOUTER</button>
+                    <button type="submit" name="update" class="btn btn-primary btn-lg">UPDATE</button>
                   </div>
+                  <input type="hidden" name="id_election" value="<?php echo $id_election;?>"> 
 
                 </form>
 
@@ -119,5 +106,6 @@ if(isset($_POST["submit"])){
     </div>
   </div>
 </section>
+    
 </body>
 </html>
