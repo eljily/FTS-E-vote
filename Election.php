@@ -59,6 +59,7 @@ class CrudElection extends Election{
     }
     public function deleteParID($id_election){
          $stmt = $this->connect()->prepare("DELETE FROM election WHERE ID_Election = ?;");
+         $stmt2 = $this->connect()->prepare("DELETE FROM participation_election WHERE ID_Election = ?;");
          if($stmt->execute(array($id_election))){
             return 1 ;
          }

@@ -16,7 +16,7 @@ if(isset($_POST["submit"])){
       if($e->updateInfo($id_election,$nom,$date_debut,$date_fin)==1){
         header("location:crud_election.php");
       }
-} ?>
+} ?> 
 
 
 

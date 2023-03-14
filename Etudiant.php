@@ -120,7 +120,4 @@ class CrudEtudiant extends Etudiant{
         }
     }
 }
-
-
-
 ?>

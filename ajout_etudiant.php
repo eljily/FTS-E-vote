@@ -38,6 +38,7 @@ if(isset($_POST["submit"])){
     <title>Document</title>
 </head>
 <body>
+<p><br><br><br></p>
   <?PHP include "header_admin.php";
        ?>
 <P></P>

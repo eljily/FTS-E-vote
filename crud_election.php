@@ -56,6 +56,15 @@ if(isset($_GET['submit'])){
      <button type="submit" name="submit" class="btn btn-primary">
         modifier</button></form>
         </td>
+
+        <td>
+        <form method="POST" action="affect_candidat.php">
+        <input type="hidden" name="id_election" value="<?php echo $r["ID_Election"];?>">  
+        
+        <button type="submit" name="submit" class="btn btn-primary">
+        AFFECT DES CANDIDATS</button></form>
+        </td>
+    
     </tr>
     </tr>
     <?php } ?>
